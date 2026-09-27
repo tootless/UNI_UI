@@ -1,0 +1,107 @@
+* {
+    text-decoration: none;
+}
+
+.navbar {
+    display: flex;
+    background-color: #9999cc;
+}
+
+.navbar a {
+    color: black;
+    padding: 3vh;
+    text-align: center;
+    font-size: 2vw;
+}
+
+#slideshow {
+    overflow: hidden;
+    height: 80vh;
+    width: 75vw;
+    margin: 0 auto;
+    position: relative;
+}
+
+#slideshow input[type="radio"] {
+    display: none;
+}
+
+.slide-wrapper {
+    display: flex;
+    width: 500%;
+    height: 100%;
+    transition: transform 0.5s ease;
+}
+
+.slide {
+    width: 20%;
+    height: 80vh;
+    flex-shrink: 0;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.slide-buttons label {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    color: black;
+
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#slide1:checked ~ .slide-wrapper {
+    transform: translateX(0);
+}
+
+#slide2:checked ~ .slide-wrapper {
+    transform: translateX(-20%);
+}
+
+#slide3:checked ~ .slide-wrapper {
+    transform: translateX(-40%);
+}
+
+#slide4:checked ~ .slide-wrapper {
+    transform: translateX(-60%);
+}
+
+#slide5:checked ~ .slide-wrapper {
+    transform: translateX(-80%);
+}
+
+#slide1:checked ~ .slide-buttons label[for="slide1"],
+#slide2:checked ~ .slide-buttons label[for="slide2"],
+#slide3:checked ~ .slide-buttons label[for="slide3"],
+#slide4:checked ~ .slide-buttons label[for="slide4"],
+#slide5:checked ~ .slide-buttons label[for="slide5"] {
+    background: black;
+    color: white;
+}
+
+@media screen and (max-width:800px) {
+    .navbar {
+        flex-direction:column;
+    }
+}
