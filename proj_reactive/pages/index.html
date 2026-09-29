@@ -1,68 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AVE</title>
     <link rel="stylesheet" href="index.css">
 </head>
+
 <body>
-<div id="slideshow">
+    <div id="slideshow">
 
-    <div class="navbar">
-        <a href = "../pages/blog.html">BLOG</a>
-        <a href = "../pages/about.html">MOTIVATION</a>
+        <div class="navbar">
+            <a href="../pages/blog.html" target="_blank">BLOG</a>
+            <a href="../pages/about.html" target="_blank">MOTIVATION</a>
+        </div>
+
+        <input type="radio" name="slide" id="slide1" checked>
+        <input type="radio" name="slide" id="slide2">
+        <input type="radio" name="slide" id="slide3">
+        <input type="radio" name="slide" id="slide4">
+
+        <div class="slide-wrapper">
+
+            <div class="slide">
+                <img class="game-img" src="../assets/game1.jpg" alt="Armored Core IV: Fires of Rubicon">
+
+                <details>
+                    <summary>
+                        <img class="game-logo" src="../assets/game1_logo.svg.webp" alt="logo summary"
+                            style="filter:invert(1)">
+                    </summary>
+
+                    <div class="game-info">
+                        <p><b>Release Date:</b> August 25, 2023</p>
+                        <p><b>Genre:</b> Action</p>
+                        <a href = "https://store.steampowered.com/app/1888160/ARMORED_CORE_VI_FIRES_OF_RUBICON/" target="_blank"
+                            style = "color:white; text-decoration: underline;">
+                            Steam Page</a>
+                    </div>
+                </details>
+            </div>
+
+            <div class="slide">
+                <img class="game-img" src="../assets/game2.jpg" alt="Bloodborne">
+
+                <details>
+                    <summary>
+                        <img class="game-logo" src="../assets/game2_logo.svg.webp" alt="logo summary"
+                            style="filter:invert(1)">
+                    </summary>
+
+                    <div class="game-info">
+                        <p><b>Release Date:</b> August 25, 2023</p>
+                        <p><b>Genre:</b> Action</p>
+                        <a href = "https://www.playstation.com/ja-jp/games/bloodborne/" target="_blank"
+                            style = "color:white; text-decoration: underline;">
+                            Official Page</a>
+                    </div>
+                </details>
+            </div>
+
+            <div class="slide">
+                <img class="game-img" src="../assets/game3.jpg" alt="Elden Ring Nightreign">
+
+                <details>
+                    <summary>
+                        <img class="game-logo" src="../assets/game3_logo.png" alt="logo summary">
+                    </summary>
+
+                    <div class="game-info">
+                        <p><b>Release Date:</b> August 25, 2023</p>
+                        <p><b>Genre:</b> Action</p>
+                        <a href = "https://store.steampowered.com/app/2622380/ELDEN_RING_NIGHTREIGN/" target="_blank"
+                            style = "color:white; text-decoration: underline;">
+                            Steam Page</a>
+                    </div>
+                </details>
+            </div>
+
+            <div class="slide">
+                <img class="game-img" src="../assets/game4.jpg" alt="The Duskbloods">
+
+                <details>
+                    <summary>
+                        <img class="game-logo" src="../assets/game4_logo.png" alt="logo summary">
+                    </summary>
+
+                    <div class="game-info">
+                        <p><b>Release Date:</b> August 25, 2023</p>
+                        <p><b>Genre:</b> Action</p>
+                        <a href = "https://www.theduskbloods.jp/index.html" target="_blank"
+                            style = "color:white; text-decoration: underline;">
+                            Official Page</a>
+                    </div>
+                </details>
+            </div>
+
+        </div>
+
+        <div class="slide-buttons">
+            <label for="slide1">1</label>
+            <label for="slide2">2</label>
+            <label for="slide3">3</label>
+            <label for="slide4">4</label>
+        </div>
+
+        <!-- footer with fromsoftware logo and thats it-->
     </div>
-
-    <input type="radio" name="slide" id="slide1" checked>
-    <input type="radio" name="slide" id="slide2">
-    <input type="radio" name="slide" id="slide3">
-    <input type="radio" name="slide" id="slide4">
-    <input type="radio" name="slide" id="slide5">
-
-    <div class="slide-wrapper">
-
-        <div class="slide">
-            <a href = "game1.html" target="_blank">
-                <img src="../assets/game1.jpg" alt="Armored Core IV: Fires of Rubicon">
-            </a>
-        </div>
-
-        <div class="slide">
-            <a href = "game2.html" target="_blank">
-                <img src="../assets/game2.jpg" alt="Bloodborne">
-            </a>
-        </div>
-
-        <div class="slide">
-            <a href = "game3.html" target="_blank">
-                <img src="../assets/game3.jpg" alt="Sekiro: Shadows Die Twice">
-            </a>
-        </div>
-
-        <div class="slide">
-            <a href = "game4.html" target="_blank">
-                <img src="../assets/game4.jpg" alt="Elden Ring Nightreign">
-            </a>
-        </div>
-
-        <div class="slide">
-            <a href = "game5.html" target="_blank">
-                <img src="../assets/game5.jpg" alt="The Duskbloods">
-            </a>
-        </div>
-
-    </div>
-
-    <div class="slide-buttons">
-        <label for="slide1">1</label>
-        <label for="slide2">2</label>
-        <label for="slide3">3</label>
-        <label for="slide4">4</label>
-        <label for="slide5">5</label>
-    </div>
-
-</div>
 
 </body>
+
 </html>
