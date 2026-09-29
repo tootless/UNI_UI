@@ -13,7 +13,10 @@
     .navbar {
         display: flex;
         flex-direction: row-reverse;
+        align-items: center;
         position: absolute;
+        top: 0;
+        right: 0;
         width: 100%;
         z-index: 10;
         background: transparent;
@@ -22,16 +25,16 @@
     .navbar a {
         color: white;
         text-align: center;
-        font-size: 1.4vw;
-        margin-right: 3%;
-        margin-top: 3%;
+        font-size: clamp(18px, 1.6vw, 25px);
+        /*min, pref, max*/
+        margin-right: clamp(16px, 3vw, 50px);
+        margin-top: clamp(16px, 3vw, 50px);
     }
 
     #slideshow {
         overflow: hidden;
         height: 100vh;
         width: 100%;
-        margin: 0 auto; /* top right bottom left */
         position: relative;
     }
 
@@ -61,17 +64,54 @@
     }
 
     .game-logo {
-        width: 25vw;
+        width: clamp(175px, 25vw, 450px);
         height: auto;
         display: block;
     }
 
+    .inverted-logo {
+        filter: invert(1);
+    }
+
+    .game-info {
+        font-size: clamp(13px, 1.1vw, 20px);
+        margin-top: clamp(10px, 1vw, 20px);
+        max-width: clamp(250px, 30vw, 500px);
+    }
+
+    .game-info p {
+        font-size: inherit;
+        margin: 0.5em 0;
+    }
+
+    .game-info b {
+        font-size: inherit;
+    }
+
+    .game-info a {
+        font-size: inherit;
+        color: white;
+        text-decoration: underline;
+    }
+
     details {
         position: absolute;
-        left: 10%;
-        top: 20%;
+        left: clamp(40px, 10vw, 180px);
+        top: clamp(100px, 20vh, 250px);
         z-index: 20;
         color: white;
+    }
+
+    .reveal-text {
+        position: relative;
+        top: clamp(0.7vh, 0.8vh, 1vh);
+        font-size: clamp(1vh, 1.2, 1.4vh);
+        font-style: oblique;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    details[open] .reveal-text {
+        display: none;
     }
 
     summary {
@@ -87,12 +127,15 @@
 
         display: flex;
         justify-content: center;
-        gap: 0.5rem;
+        align-items: center;
+        gap: clamp(6px, 0.8vw, 14px);
     }
 
     .slide-buttons label {
-        width: 2vw;
-        height: 2vw;
+        width: clamp(26px, 2.3vw, 40px);
+        height: clamp(26px, 2.3vw, 40px);
+        font-size: clamp(9px,1vw,20px);
+
 
         display: flex;
         align-items: center;
@@ -103,6 +146,13 @@
 
         cursor: pointer;
         border-radius: 10%;
+    }
+
+    .slide-buttons label:hover {
+        background: #666699;
+        color: white;
+
+        transform: scale(1.08);
     }
 
     #slide1:checked~.slide-wrapper {
@@ -121,11 +171,6 @@
         transform: translateX(-75%);
     }
 
-    .slide-buttons label:hover {
-        background: #666699;
-        color: white;
-    }
-
     #slide1:checked~.slide-buttons label[for="slide1"],
     #slide2:checked~.slide-buttons label[for="slide2"],
     #slide3:checked~.slide-buttons label[for="slide3"],
@@ -139,22 +184,101 @@
     }
 
     /* Phones, portrait tablets, large phones */
-    @media screen and (max-width:768px) {
+    /* w: 480px - 768px */
+    @media screen and (max-width: 768px) {
+
         .navbar {
-            flex-direction: column;
+            justify-content: center;
+            background:rgba(125, 125, 151,0.08);
+        }
+
+        .navbar a {
+            font-size: clamp(14px, 2vw, 20px);
+        }
+
+        .slide:nth-child(2) .game-img {
+            object-position: 75%;
+        }
+
+        .game-logo {
+            width: clamp(240px, 40vw, 280px);
+        }
+
+        .reveal-text {
+            top: clamp(3px, 0.2vh, 10px);
+            font-size: clamp(8px, 1.5vw, 17px);
+        }
+
+        .game-info {
+            font-size: clamp(10px, 1.2vw, 17px);
+            max-width: 55vw;
         }
 
         .slide-buttons {
+            left: 10px;
             flex-direction: column;
             align-items: flex-start;
         }
+
+        .slide-buttons label {
+            width: clamp(18px, 6vw, 28px);
+            height: clamp(18px, 6vw, 28px);
+            font-size: clamp(10px, 1vw, 13px);
+        }
     }
 
-    /* Landscape tablets */
-    @media only screen and (min-width: 768px) {}
 
-    /* Laptops/desktops and large laptops/desktops */
-    @media only screen and (min-width: 992px) {}
+    /* very small phones */
+    /* w: <480px */
 
-    /* Extra large devices (large laptops and desktops, 1200px and up) */
-    @media only screen and (min-width: 1200px) {}
+    @media screen and (max-width: 480px) {
+
+        .navbar a {
+            font-size: 14px;
+            margin-right: 12px;
+            margin-top: 15px;
+        }
+
+        .game-logo {
+            width: clamp(200px,80vw,300px);
+        }
+
+        .game-info {
+            max-width: 65vw;
+            font-size: 13px;
+        }
+
+        .reveal-text {
+            font-size: clamp(9px, 2.5vw, 14px);
+        }
+
+        .slide-buttons {
+            left: 7px;
+            gap: 5px;
+        }
+
+        .slide-buttons label {
+            width: clamp(15px, 8vw, 28px);
+            height: clamp(15px, 8vw, 28px);
+            font-size: clamp(10px, 1vw, 13px);
+        }
+    }
+
+
+    /* landscape screens */
+    /* h: <500px */
+
+    @media screen and (max-height: 500px) {
+
+        details {
+            top: 20vh;
+        }
+
+        .game-logo {
+            width: clamp(120px, 25vw, 250px);
+        }
+
+        .game-info {
+            font-size: clamp(11px, 1.5vw, 15px);
+        }
+    }
