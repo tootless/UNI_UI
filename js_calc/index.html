@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mini SR-270N</title>
+<link rel="stylesheet" href="index.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="calculator">
+    <div class="screen-wrapper">
+    <div id="screen">
+        <div id="expression">
+            <span id="expression-text"></span>
+            <span id="typed-cursor"></span>
+        </div>
+
+        <div id="result">0</div>
+    </div>
+</div>
+    <div id="bottom-keys">
+      <button id = "clear-btn" onclick="clearDisplay()">ON/AC</button>
+      <button id = "clear-btn" onclick="disableDisplay()">OFF</button>
+      <button id = "clear-btn" onclick=""></button>
+      <button id = "clear-btn" onclick=""></button>
+      <button id = "clear-btn" onclick=""></button>
+
+      <!--(mostly) functional BOTTOM keys-->
+      <button class = "bottom-btn" onclick="appendToDisplay('7')">7</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('8')">8</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('9')">9</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('√')">√</button>
+      <button class = "bottom-btn" onclick="deleteLast('DEL')">DEL</button>
+      
+      <button class = "bottom-btn" onclick="appendToDisplay('4')">4</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('5')">5</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('6')">6</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('×')">×</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('÷')">÷</button>
+
+      <button class = "bottom-btn" onclick="appendToDisplay('1')">1</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('2')">2</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('3')">3</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('+')">+</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('-')">-</button>
+
+      <button class = "bottom-btn" onclick="appendToDisplay('0')">0</button>
+      <button class = "bottom-btn" onclick="appendToDisplay('.')">.</button>
+      <button class = "bottom-btn" onclick="">EXP</button>
+       <button class="bottom-btn" onclick="appendToDisplay('Ans')">ANS</button>
+      <button class = "bottom-btn" onclick="calculate()">=</button>
+    </div>
+  </div>
+<script src="index.js"></script>
+</body>
+</html>

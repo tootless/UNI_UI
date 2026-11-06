@@ -1,0 +1,86 @@
+#calculator{
+    width: 300px;
+    height: 500px;
+}
+
+/*display*/
+.screen-wrapper {
+    margin: 15px;
+    padding: 3px;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 2px rgba(255, 255, 255, 0.5);
+    border-radius: 5px;
+}
+
+#screen {
+    height: 60px;
+    background-image: linear-gradient(
+        to bottom,
+        rgb(255, 204, 0) 0%,
+        rgb(255, 222, 116) 100%
+    );
+    border-radius: 30% / 7%;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+    padding: 8px 5px;
+    overflow: hidden;
+}
+
+#expression {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+#typed-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 3px;
+    background-color: black;
+    align-self: flex-end;
+    margin-bottom: 2px;
+    animation: 1s blink step-end infinite;
+}
+
+#result {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 28px;
+    text-align: right;
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+@keyframes blink {
+    from, to {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/*buttons*/
+#bottom-keys{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap:10px;
+}
+
+button{
+    width: 100%;
+    height: 40px;
+    border-radius: 7px 7px 16px 16px;/*top left; top right; bottom right; bottom left*/
+    cursor: pointer;
+}
+
+.bottom-btn{
+    background-color: #272528;
+    color: white;
+    font-size:1.25rem;
+    font-weight:bold;
+}
