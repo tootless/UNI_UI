@@ -5,21 +5,18 @@
 
 /*display*/
 .screen-wrapper {
-    margin: 15px;
-    padding: 3px;
-    background-color: rgba(0, 0, 0, 0.3);
+    margin: 0.8vw;
+    padding: 6.5px;
+    background-color: #4D5053;
     box-shadow: 0 2px 2px rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
+    border-radius: 5px 5px 10% 10%;
 }
 
 #screen {
     height: 60px;
-    background-image: linear-gradient(
-        to bottom,
-        rgb(255, 204, 0) 0%,
-        rgb(255, 222, 116) 100%
-    );
-    border-radius: 30% / 7%;
+    background-color: #96A58D;
+    color: black;
+    border-radius: 5px;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
     padding: 8px 5px;
     overflow: hidden;
@@ -27,7 +24,7 @@
 
 #expression {
     font-family: 'Press Start 2P', cursive;
-    font-size: 12px;
+    font-size: 20px;
     height: 20px;
     line-height: 20px;
     overflow: hidden;
@@ -70,17 +67,35 @@
     grid-template-columns: repeat(5, 1fr);
     gap:10px;
 }
-
+#top-keys{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap:10px;
+}
 button{
     width: 100%;
-    height: 40px;
     border-radius: 7px 7px 16px 16px;/*top left; top right; bottom right; bottom left*/
     cursor: pointer;
 }
 
+#on-btn{
+
+}
+
+#off-btn{
+
+}
+
+.top-btn{
+    height:20px;
+    background-color: grey;
+    font-size: 1rem;
+}
+
 .bottom-btn{
+    height: 40px;
     background-color: #272528;
     color: white;
-    font-size:1.25rem;
+    font-size: 1rem;
     font-weight:bold;
 }
