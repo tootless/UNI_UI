@@ -5,7 +5,7 @@ let hasCalculated = false;
 
 const binaryOperators = ["+", "-", "*", "/", "^"];
 const allowedSymbols = ["+", "-", "*", "/", "^", "%", "(", ")", "!"];
-const allowedFunctions = ["Ans", "sqrt"];
+const allowedFunctions = ["Ans", "√"];
 
 const expressionText = document.getElementById("expression-text");
 const result = document.getElementById("result");
@@ -13,8 +13,13 @@ const typedCursor = document.getElementById("typed-cursor");
 
 //display functions
 function updateDisplay() {
-    expressionText.textContent = expression;
+    if (isEnabled) {
+        expressionText.textContent = expression;
+    } else {
+        expressionText.textContent = "Paspausk ON/AC";
+    }
 
+    //blinking cursor hidden when off is presseddd
     typedCursor.style.display = isEnabled ? "inline-block" : "none";
 }
 
@@ -23,6 +28,7 @@ function clearDisplay() {
     expression = "";
     hasCalculated = false;
 
+    result.classList.remove("error-message");
     result.textContent = "0";
 
     updateDisplay();
@@ -120,15 +126,14 @@ function createTokens(input) {
                 tokens.push("Ans");
                 i += 2;
             }
-            else if (input.startsWith("sqrt", i)) {
-                tokens.push("sqrt");
-                i += 3;
+            else if (input.startsWith("√", i)) {
+                tokens.push("√");
             }
             else if (allowedSymbols.includes(character)) {
                 tokens.push(character);
             }
             else {
-                throw new Error("Negalimas: " + character);
+                throw new Error("Negalimas char: " + character);
             }
         }
     }
@@ -159,6 +164,7 @@ function calculateFactorial(number) {
     return answer;
 }
 
+
 function calculateExpression(input) {
     const tokens = createTokens(input);
 
@@ -168,24 +174,15 @@ function calculateExpression(input) {
 
     let position = 0;
 
-    function readValue() {
-        let sign = 1;
-
-        while (tokens[position] === "-" ||tokens[position] === "+") 
-            {
-            if (tokens[position] === "-") {
-                sign *= -1;
-            }
-
-            position++;
-        }
-
-        let value;
+    //nums, ans, ()
+    function readPrimary() {
         const token = tokens[position];
 
         if (token === undefined) {
             throw new Error("Neuzbaigta");
         }
+
+        let value;
 
         if (!isNaN(token)) {
             value = Number(token);
@@ -197,21 +194,6 @@ function calculateExpression(input) {
             position++;
         }
 
-        else if (token === "sqrt") {
-            position++;
-
-            value = readValue();
-
-            if (token === "sqrt") {
-                if (value < 0) {
-                    throw new Error("Saknis is neigiamo skaiciaus");
-                }
-
-                value = Math.sqrt(value);
-            }
-        }
-
-        // () check
         else if (token === "(") {
             position++;
 
@@ -228,17 +210,20 @@ function calculateExpression(input) {
             throw new Error("Invalid");
         }
 
-        value *= sign;
+        return value;
+    }
 
-        // % and !
-        while (tokens[position] === "%" || tokens[position] === "!")
-            {
-            if (tokens[position] === "%") {
-                value = value / 100;
+    // !, %
+    function readPostfix() {
+        let value = readPrimary();
+
+        while (tokens[position] === "!" || tokens[position] === "%") {
+            if (tokens[position] === "!") {
+                value = calculateFactorial(value);
             }
 
             else {
-                value = calculateFactorial(value);
+                value /= 100;
             }
 
             position++;
@@ -247,54 +232,111 @@ function calculateExpression(input) {
         return value;
     }
 
-    //calculate from left to right
-    function readExpression() {
-        let answer = readValue();
+    // sqrt
+    function readPowerBase() {
+        if (tokens[position] === "√") {
+            position++;
+            const value = readUnary();
 
-        while (position < tokens.length && tokens[position] !== ")")
-            {
-            const operator = tokens[position];
-
-            if (!binaryOperators.includes(operator)) {
-                throw new Error("Error");
+            if (value < 0) {
+                throw new Error("Saknis is neigiamo skaiciaus");
             }
 
+            return Math.sqrt(value);
+        }
+
+        return readPostfix();
+    }
+
+    // ^
+    function readPower() {
+        const base = readPowerBase();
+
+        if (tokens[position] === "^") {
             position++;
 
-            const nextNumber = readValue();
+            const exponent = readUnary();
+            return Math.pow(base, exponent);
+        }
 
-            switch (operator) {
-                case "+":
-                    answer += nextNumber;
-                    break;
+        return base;
+    }
 
-                case "-":
-                    answer -= nextNumber;
-                    break;
+    // signs
+    function readUnary() {
+        if (tokens[position] === "-") {
+            position++;
+            return -readUnary();
+        }
 
-                case "*":
-                    answer *= nextNumber;
-                    break;
+        if (tokens[position] === "+") {
+            position++;
+            return readUnary();
+        }
 
-                case "/":
-                    if (nextNumber === 0) {
-                        throw new Error("Dalyba is 0");
-                    }
+        return readPower();
+    }
 
-                    answer /= nextNumber;
-                    break;
+    // *, /
+    function readTerm() {
+        let value = readUnary();
 
-                case "^":
-                    answer = Math.pow(answer, nextNumber);
-                    break;
+        while (
+            tokens[position] === "*" ||
+            tokens[position] === "/"
+        ) {
+            const operator = tokens[position];
+            position++;
+
+            const nextValue = readUnary();
+
+            if (operator === "*") {
+                value *= nextValue;
             }
 
-            if (!Number.isFinite(answer)) {
+            else {
+                if (nextValue === 0) {
+                    throw new Error("Dalyba is 0");
+                }
+
+                value /= nextValue;
+            }
+
+            if (!Number.isFinite(value)) {
                 throw new Error("Undefined/Per didelis");
             }
         }
 
-        return answer;
+        return value;
+    }
+
+    // +, -
+    function readExpression() {
+        let value = readTerm();
+
+        while (
+            tokens[position] === "+" ||
+            tokens[position] === "-"
+        ) {
+            const operator = tokens[position];
+            position++;
+
+            const nextValue = readTerm();
+
+            if (operator === "+") {
+                value += nextValue;
+            }
+
+            else {
+                value -= nextValue;
+            }
+
+            if (!Number.isFinite(value)) {
+                throw new Error("Undefined/Per didelis");
+            }
+        }
+
+        return value;
     }
 
     const answer = readExpression();
@@ -310,10 +352,14 @@ function calculateExpression(input) {
     return answer;
 }
 
+
 function calculate() {
     if (!isEnabled || expression.trim() === "") {
         return;
     }
+
+    //reset error styling
+    result.classList.remove("error-message");
 
     try {
         const answer = calculateExpression(expression);
@@ -326,6 +372,7 @@ function calculate() {
 
     catch (error) {
         result.textContent = error.message;
+        result.classList.add("error-message");
         hasCalculated = false;
     }
 
